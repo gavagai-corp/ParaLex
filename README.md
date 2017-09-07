@@ -1,3 +1,5 @@
+![Gavagai](gavagai.png)
+
 # ParaLex
 Paradigmatic term clusters in multiple languages - a resource for evaluating word spaces.
 
@@ -5,9 +7,15 @@ The dataset consists of thematic word lists that represent a number of different
 paradigms, such as days of the week, months of the year and common fruit and vegetables. 
 The evaluation data has been translated to more than 45 different languages.
 
-## Rationale and usage
 
 ## Download
+
+## Contribute
+
+While we will work to extend the data set to include new languages, and more paradigmatic clusters,
+we encourage anyone in the field to contribute to the data set. You can do so by following the [common
+GitHub workflow](https://guides.github.com/introduction/flow/): fork the project, make changes to 
+it, and submit a pull request.
 
 ## License and attribution
 
@@ -25,4 +33,9 @@ When referring to the ParaLex data set, please cite this publication
         url = {}
     }
 
+## About Gavagai
 
+[Gavagai](http://gavagai.se/) is a Swedish language technology company spun off from the 
+Swedish Institute of Computer Science. Gavagai builds services such 
+as [the Gavagai Explorer](https://explorer.gavagai.se/), 
+and [the Gavagai Monitor](http://monitor.gavagai.se/).
