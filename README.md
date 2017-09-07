@@ -10,3 +10,7 @@ The evaluation data has been translated to more than 45 different languages.
 ## Download
 
 ## License and attribution
+
+The data set licensed under [Apache License 2.0](ParaLex/LICENSE).
+
+
