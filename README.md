@@ -15,7 +15,7 @@ The evaluation data has been translated to more than 45 different languages.
 While we will work to extend the data set to include new languages, and more paradigmatic clusters,
 we encourage anyone in the field to contribute to the data set. You can do so by following the [common
 GitHub workflow](https://guides.github.com/introduction/flow/): fork the project, make changes to 
-it, and submit a pull request.
+it according to [these instructions](ANNOTATION_INSTRUCTIONS.md), and submit a pull request.
 
 ## License and attribution
 
