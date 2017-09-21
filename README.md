@@ -10,6 +10,8 @@ The evaluation data has been translated to more than 45 different languages.
 
 ## Download
 
+The data set is available as a CSV file [here](ParaLex.csv).
+
 ## Contribute
 
 While we will work to extend the data set to include new languages, and more paradigmatic clusters,
