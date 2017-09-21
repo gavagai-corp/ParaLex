@@ -31,11 +31,11 @@ Each column in the test data CSV sheet has a special meaning.
 |EN| drinks |beer |wine |liquor |soda|
 |EN| establishments |restaurant |bistro |cafe |diner |bar |pub |bakery|
 |EN| fruit |apple |pineapple |pear |orange|
-|EN| genitals |vagina |penis |cock |pussy|
+|EN| genitals |vagina |penis | kidney| liver| heart| bladder|
 |EN| hotdrinks |coffee |tea |cocoa|
 |EN| months |january |february |march |april |may |june |july |august |september |october |november |december|
 |EN| nordics |sweden |finland |denmark |norway |iceland|
-|EN| vegetables |tomato  avocado |carrot |spinach |cucumber |celery |onion |salad
+|EN| vegetables |tomato |avocado |carrot |spinach |cucumber |celery |onion |salad
 |EN| weekdays |monday |tuesday |wednesday |thursday |friday |saturday |sunday|
 
 
