@@ -6,7 +6,7 @@ Paradigmatic term clusters in multiple languages - a resource for evaluating wor
 ## Instructions for adding test data to ParaLex
 
 Please create word lists for the different categories (abbrevmonths, cities, colours, dayparts, drinks, establishments, 
-genitals, hotdrinks, months, nordics,vegetables, weekdays) with respect to the format as shown in the Example section below. 
+organs, hotdrinks, months, nordics,vegetables, weekdays) with respect to the format as shown in the Example section below. 
 
 See the Explanation section for further details about each type of paradigm.
 
@@ -46,7 +46,7 @@ Each column in the test data CSV sheet has a special meaning.
 * **dayparts**: names of the different parts of the day (not necessarily translation but common expressions in respective language)
 * **drinks**: names of drinks (common [cold] drinks in respective language)
 * **esablishments**: names of establishments (common establishments in respective language)
-* **organs**: names of genitals (common names for male and female genitals in respective language, both slang and more formal)
+* **organs**: names of bodily organs
 * **hotdrinks**: names of hot drinks (common hot drinks in respective language)
 * **months**: names of months (translation)
 * **nordics**: names of the nordic countries (translation)
