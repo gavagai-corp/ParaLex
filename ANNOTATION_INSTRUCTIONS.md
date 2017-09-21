@@ -31,7 +31,7 @@ Each column in the test data CSV sheet has a special meaning.
 |EN| drinks |beer |wine |liquor |soda|
 |EN| establishments |restaurant |bistro |cafe |diner |bar |pub |bakery|
 |EN| fruit |apple |pineapple |pear |orange|
-|EN| genitals |vagina |penis | kidney| liver| heart| bladder|
+|EN| organs |vagina |penis | kidney| liver| heart| bladder|
 |EN| hotdrinks |coffee |tea |cocoa|
 |EN| months |january |february |march |april |may |june |july |august |september |october |november |december|
 |EN| nordics |sweden |finland |denmark |norway |iceland|
@@ -46,7 +46,7 @@ Each column in the test data CSV sheet has a special meaning.
 * **dayparts**: names of the different parts of the day (not necessarily translation but common expressions in respective language)
 * **drinks**: names of drinks (common [cold] drinks in respective language)
 * **esablishments**: names of establishments (common establishments in respective language)
-* **genitals**: names of genitals (common names for male and female genitals in respective language, both slang and more formal)
+* **organs**: names of genitals (common names for male and female genitals in respective language, both slang and more formal)
 * **hotdrinks**: names of hot drinks (common hot drinks in respective language)
 * **months**: names of months (translation)
 * **nordics**: names of the nordic countries (translation)
