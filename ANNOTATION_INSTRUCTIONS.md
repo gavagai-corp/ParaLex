@@ -10,7 +10,8 @@ organs, hotdrinks, months, nordics,vegetables, weekdays) with respect to the for
 
 See the Explanation section for further details about each type of paradigm.
 
-Translate directly from English if mentioned in the explanation, and use the English example as a reference otherwise.
+Translate directly from English if it is approroiate, otherewise use the English example as a reference. There are additional
+notes under the explanation section.
 
 ### Format 
 Each column in the test data CSV sheet has a special meaning.
