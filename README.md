@@ -7,6 +7,8 @@ The dataset consists of thematic word lists that represent a number of different
 paradigms, such as days of the week, months of the year and common fruit and vegetables. 
 The evaluation data has been translated to more than 45 different languages.
 
+Source code to assist with the suggested evaluation methodologies will soon be made available.
+
 
 ## Download
 
