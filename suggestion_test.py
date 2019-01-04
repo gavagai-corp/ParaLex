@@ -6,6 +6,8 @@ from collections import Counter
 from numpy import mean, std, var
 from itertools import combinations as choose
 import io
+import csv
+import argparse
 # from api_functions import paradigmatic_neighbours
 
 
@@ -33,6 +35,11 @@ def get_words_from_cluster_file(filename):
             # Normalise to lowercase. Strip newline characters. Admin for multi-word expressions.
             output.append(spaced_line)
     return output
+
+
+def get_words_from_csv(filename):
+    with open(filename) as f:
+        csv_reader = csv.reader(f)
 
 
 def cluster_permutations(list_of_words):
@@ -170,7 +177,6 @@ def pretty_print(test_results):
 
 if __name__ == '__main__':
     if sys.argv[2] == '-t':
-        # model = KeyedVectors.load_word2vec_format(sys.argv[1], binary=False)
         model = Word2Vec.load_word2vec_format(sys.argv[1], binary=False, encoding='utf8')
     elif sys.argv[2] == '-b':
         model = Word2Vec.load_word2vec_format(sys.argv[1], binary=True, encoding='utf8')
