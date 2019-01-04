@@ -1,18 +1,12 @@
 from __future__ import print_function, division
 from gensim.models import Word2Vec
-# from gensim.models.keyedvectors import KeyedVectors
-from random import shuffle  # A function to randomly shuffle a list.
-import os  # A library to interface with the operating system.
+import os
 import sys
-from time import time
 from collections import Counter
 from numpy import mean, std, var
 from itertools import combinations as choose
 import io
-
-
 # from api_functions import paradigmatic_neighbours
-# our_dataset = ['en/'+f for f in os.listdir('en')]
 
 
 def paradigmatic_neighbours(word):
@@ -35,8 +29,8 @@ def get_words_from_cluster_file(filename):
     with io.open(filename, mode='rU', encoding='utf-8') as f:
         output = []
         for line in list(f):  # Took away the chop of 8 here
-            spaced_line = line.strip().lower().replace(' ',
-                                                       '_')  # Some admin for multi-word expressions. Normalise to lowercase. Strip newline characters.
+            spaced_line = line.strip().lower().replace(' ', '_')
+            # Normalise to lowercase. Strip newline characters. Admin for multi-word expressions.
             output.append(spaced_line)
     return output
 
@@ -183,6 +177,5 @@ if __name__ == '__main__':
     lang = sys.argv[3]
     # argv 1=vecs, 2=vec_format, 3=lang in GavFormat
     our_dataset = ['testData/' + lang + '/' + f for f in os.listdir('testData/' + lang + '/')]
-    # our_dataset = our_dataset + ['testData2/'+lang+'/'+f for f in os.listdir('testData2/'+lang+'/')]
     results = iter_sug_test_with_seed_coherence(list_of_clusters=our_dataset, threshold=2)
     pretty_print(results)
