@@ -40,6 +40,8 @@ def get_words_from_cluster_file(filename):
 def get_words_from_csv(filename):
     with open(filename) as f:
         csv_reader = csv.reader(f)
+        for line in csv_reader:
+            print([term for term in line if term != ''])
 
 
 def cluster_permutations(list_of_words):
