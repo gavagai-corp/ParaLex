@@ -25,24 +25,12 @@ def seed_suggestions_fancy(seeds):
     return suggestions
 
 
-def get_words_from_cluster_file(filename):
-    """An administrative function to read each cluster file in the data set and return the first eight items as a list.
-    The remaining items are outliers, not related to this task."""
-    with io.open(filename, mode='rU', encoding='utf-8') as f:
-        output = []
-        for line in list(f):  # Took away the chop of 8 here
-            spaced_line = line.strip().lower().replace(' ', '_')
-            # Normalise to lowercase. Strip newline characters. Admin for multi-word expressions.
-            output.append(spaced_line)
-    return output
-
-
 def read_csv(filename='ParaLex.csv'):
     output = []
     with open(filename) as f:
         csv_reader = csv.reader(f)
         for line in csv_reader:
-            output.append([term for term in line if term != ''])
+            output.append([term.strip() for term in line if term != ''])
     return output[1:]
 
 
