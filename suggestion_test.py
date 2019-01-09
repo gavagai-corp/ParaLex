@@ -1,5 +1,7 @@
 from __future__ import print_function, division
 from gensim.models import Word2Vec
+from gensim.scripts.glove2word2vec import glove2word2vec
+import gensim
 import os
 import sys
 from collections import Counter
@@ -11,14 +13,14 @@ import argparse
 # from api_functions import paradigmatic_neighbours
 
 
-def paradigmatic_neighbours(word):
-    return [word for word, _ in model.most_similar(word, topn=30)]
+def paradigmatic_neighbours(word, model_under_evaluation):
+    return [word for word, _ in model_under_evaluation.most_similar(word, topn=30)]
 
 
-def seed_suggestions_fancy(seeds):
+def seed_suggestions_fancy(seeds, model_under_evaluation):
     suggestions = Counter()
     for seed in seeds:
-        neighbours = paradigmatic_neighbours(seed)
+        neighbours = paradigmatic_neighbours(seed, model_under_evaluation)
         for neigh in neighbours:
             if neigh not in seeds:
                 suggestions[neigh] += 1
@@ -40,7 +42,7 @@ def load_language_specific_data(language):
         selection_column = 1
     else:  # language code
         selection_column = 0
-    rows = [row for row in data_sheet if row[selection_column] == language]
+    rows = [row for row in data_sheet if row[selection_column] == language.upper()]
     if len(rows) == 0:
         raise Exception('Language not found')
     output = {}
@@ -58,19 +60,19 @@ def cluster_permutations(list_of_words):
     return permutations
 
 
-def cluster_test(cluster_words, threshold=2):
+def cluster_test(cluster_words, model_under_evaluation, threshold=2):
     """Takes a cluster as a list of words, gets all permutations and calls permutation_test for each permutation."""
     perm_scores = []
     all_possibilities = cluster_permutations(cluster_words)
     for poss in all_possibilities:
-        perm_score = permutation_test(poss[0], poss[1], threshold)
+        perm_score = permutation_test(poss[0], poss[1], model_under_evaluation, threshold)
         perm_scores.append(perm_score)
     return round(mean(perm_scores), 2), round(std(perm_scores), 2), round(var(perm_scores), 2)
 
 
-def permutation_test(seeds, targets, threshold=2):
+def permutation_test(seeds, targets, model_under_evaluation, threshold=2):
     print("Seeds:", seeds, "Targets:", targets)
-    current_suggestions = seed_suggestions_fancy(seeds)
+    current_suggestions = seed_suggestions_fancy(seeds, model_under_evaluation)
     current_suggestions_vocab = current_suggestions.keys()
 
     iteration = 0
@@ -104,7 +106,7 @@ def permutation_test(seeds, targets, threshold=2):
             # print("Currently {0} seeds.".format(len(seeds)))
             # print(seeds) # Can be uncommented for further inspection.
 
-            current_suggestions = seed_suggestions_fancy(seeds)
+            current_suggestions = seed_suggestions_fancy(seeds, model_under_evaluation)
             current_suggestions_vocab = current_suggestions.keys()
 
             # print("Currently yielding", len(current_suggestions),"suggestions.")
@@ -126,12 +128,11 @@ def permutation_test(seeds, targets, threshold=2):
         return current_score
 
 
-def cluster_sanity_check(cluster):
-    initial_words = get_words_from_cluster_file(cluster)
+def cluster_sanity_check(cluster, model_under_evaluation):
+    initial_words = cluster
     final_words = []
     for word in initial_words:
-        if word in model.vocab:
-            #        if len(paradigmatic_neighbours(word,lang)) > 0:
+        if word in model_under_evaluation.vocab:
             final_words.append(word)
     if len(final_words) >= 3:
         return True, final_words
@@ -139,22 +140,22 @@ def cluster_sanity_check(cluster):
         return False, []
 
 
-def iter_sug_test_with_seed_coherence(list_of_clusters, threshold):
+def iter_sug_test_with_seed_coherence(evaluation_data, threshold, model_under_evaluation):
     """An implementation of the test filtering suggestions by coherence with current seeds.
     Takes a list of clusters, a number of initial seeds and a threshold of coherence.
     Carries out the test for 5 iterations, printing the cumulative recall at each iteration.
-    Unlike the previous implementation, no filering functions are needed - it's all built in."""
+    Unlike the previous implementation, no filtering functions are needed - it's all built in."""
 
     cluster_progress = 0
-    total_clusters = len(list_of_clusters)
+    total_clusters = len(evaluation_data)
     scores = []
     cluster_scores = []
-    for clust in list_of_clusters:
+    for clust in sorted(evaluation_data.keys()):
         cluster_progress += 1
         print('\n\n---NEW CLUSTER---\n#{0} of {1}:\n'.format(cluster_progress, total_clusters))
-        check, good_words = cluster_sanity_check(clust)
+        check, good_words = cluster_sanity_check(evaluation_data[clust], model_under_evaluation)
         if check:
-            clust_score, clust_std, clust_var = cluster_test(good_words, threshold)
+            clust_score, clust_std, clust_var = cluster_test(good_words, model_under_evaluation, threshold)
             print('Mean Cluster score:', clust_score)
             print('Cluster Variance:', clust_var)
             print('Cluster SD:', clust_std)
@@ -183,16 +184,27 @@ def pretty_print(test_results):
 
 
 def old_main():
-    if sys.argv[2] == '-t':
-        model = Word2Vec.load_word2vec_format(sys.argv[1], binary=False, encoding='utf8')
-    elif sys.argv[2] == '-b':
-        model = Word2Vec.load_word2vec_format(sys.argv[1], binary=True, encoding='utf8')
-    lang = sys.argv[3]
-    # argv 1=vecs, 2=vec_format, 3=lang in GavFormat
-    our_dataset = ['testData/' + lang + '/' + f for f in os.listdir('testData/' + lang + '/')]
-    results = iter_sug_test_with_seed_coherence(list_of_clusters=our_dataset, threshold=2)
+    # argv 1=vectors, 2=vec_format, 3=lang in GavFormat
+
+    path_to_model = sys.argv[1]
+    if sys.argv[2] == '-b':
+        model = Word2Vec.load_word2vec_format(path_to_model, binary=True, encoding='utf8')
+    elif sys.argv[2] == '-g':  # glove format
+        w2v_file = path_to_model[:-4] + '-w2v.txt'
+        if w2v_file in os.listdir():
+            pass
+        else:
+            glove2word2vec(path_to_model, w2v_file)
+        model = gensim.models.KeyedVectors.load_word2vec_format(w2v_file, binary=False, encoding='utf8')
+    else:
+        model = Word2Vec.load_word2vec_format(path_to_model, binary=False, encoding='utf8')
+
+    language = sys.argv[3]
+    language_data = load_language_specific_data(language)
+    results = iter_sug_test_with_seed_coherence(evaluation_data=language_data, threshold=2,
+                                                model_under_evaluation=model)
     pretty_print(results)
 
 
 if __name__ == '__main__':
-    print(load_language_specific_data('Arabic'))
+    old_main()
