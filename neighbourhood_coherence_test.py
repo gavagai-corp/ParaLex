@@ -16,12 +16,15 @@ def test_cluster(cluster_words, model_under_evaluation):
             score += sum(1 for word in cluster_words if word in neighbourhood)
         except:
             pass
-    return round(score/max_score, 0)
+    cluster_score = round(score/max_score, 2)
+    print(cluster_score)
+    return cluster_score
 
 
 def neighbourhood_coherence_test(evaluation_data, model_under_evaluation):
     results = []
-    for cluster in evaluation_data:
+    for cluster in sorted(evaluation_data.keys()):
+        print(cluster, end= ': ')
         results.append(test_cluster(evaluation_data[cluster], model_under_evaluation))
     return round(sum(results)/len(results),2)
 
