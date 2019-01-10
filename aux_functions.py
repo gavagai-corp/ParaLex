@@ -1,4 +1,8 @@
 import csv
+import os
+from gensim.models import KeyedVectors
+from gensim.scripts.glove2word2vec import glove2word2vec
+# from api_functions import paradigmatic_neighbours
 
 
 def paradigmatic_neighbours(word, model_under_evaluation):
@@ -27,3 +31,18 @@ def load_language_specific_data(language):
     for row in rows:
         output[row[2]] = row[3:]
     return output
+
+
+def load_model(file, format_flag=None):
+    if format_flag == '-b':
+        model = KeyedVectors.load_word2vec_format(file, binary=True, encoding='utf8')
+    elif format_flag == '-g':  # glove format_flag
+        w2v_file = file[:-4] + '.w2v.txt'
+        if w2v_file in os.listdir(""):
+            pass
+        else:
+            glove2word2vec(file, w2v_file)
+        model = KeyedVectors.load_word2vec_format(w2v_file, binary=False, encoding='utf8')
+    else:
+        model = KeyedVectors.load_word2vec_format(file, binary=False, encoding='utf8')
+    return model
