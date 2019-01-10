@@ -1,10 +1,6 @@
 from __future__ import print_function, division
-from gensim.models import Word2Vec
-from gensim.models import KeyedVectors
-from gensim.scripts.glove2word2vec import glove2word2vec
-from aux_functions import paradigmatic_neighbours, load_language_specific_data
+from aux_functions import paradigmatic_neighbours, load_language_specific_data, load_model
 import sys
-import os
 
 
 def test_cluster(cluster_words, model_under_evaluation):
