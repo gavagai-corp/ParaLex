@@ -34,19 +34,10 @@ def main():
     # argv 1=vectors, 2=vec_format, 3=lang in GavFormat
 
     path_to_model = sys.argv[1]
-    if sys.argv[2] == '-b':
-        model = KeyedVectors.load_word2vec_format(path_to_model, binary=True, encoding='utf8')
-    elif sys.argv[2] == '-g':  # glove format
-        w2v_file = path_to_model[:-4] + '-w2v.txt'
-        if w2v_file in os.listdir():
-            pass
-        else:
-            glove2word2vec(path_to_model, w2v_file)
-        model = KeyedVectors.load_word2vec_format(w2v_file, binary=False, encoding='utf8')
-    else:
-        model = KeyedVectors.load_word2vec_format(path_to_model, binary=False, encoding='utf8')
-
+    model_format = sys.argv[2]
     language = sys.argv[3]
+
+    model = load_model(path_to_model, model_format)
     language_data = load_language_specific_data(language)
 
     result = neighbourhood_coherence_test(language_data, model)
