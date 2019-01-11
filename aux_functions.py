@@ -54,4 +54,4 @@ def parse_arguments():
     parser.add_argument("model_format", help="the format of the model you are evaluating")
     parser.add_argument("language", help="the language of the model")
     args = parser.parse_args()
-    print(args)
+    return args.path_to_model, args.model_format, args.language
