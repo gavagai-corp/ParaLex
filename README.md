@@ -27,6 +27,7 @@ python3 neighbourhood_coherence_test.py -h
 Some typical usage examples would be:
 
 python3 vector_file.txt EN
+
 python3 glove_vector_file.txt EN -f glove
 
 The default input format for a model is a Word2Vec text file. Glove format text files and binary files are also accepted
