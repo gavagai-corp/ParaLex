@@ -1,8 +1,8 @@
 import csv
 import os
+import argparse
 from gensim.models import KeyedVectors
 from gensim.scripts.glove2word2vec import glove2word2vec
-# from api_functions import paradigmatic_neighbours
 
 
 def paradigmatic_neighbours(word, model_under_evaluation):
@@ -46,3 +46,12 @@ def load_model(file, format_flag):
     else:
         model = KeyedVectors.load_word2vec_format(file, binary=False, encoding='utf8')
     return model
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("path_to_model", help="the path of the model you wish to evaluate")
+    parser.add_argument("model_format", help="the format of the model you are evaluating")
+    parser.add_argument("language", help="the language of the model")
+    args = parser.parse_args()
+    print(args)
