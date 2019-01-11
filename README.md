@@ -7,12 +7,30 @@ The dataset consists of thematic word lists that represent a number of different
 paradigms, such as days of the week, months of the year and common fruit and vegetables. 
 The evaluation data has been translated to more than 45 different languages.
 
-Source code to assist with the suggested evaluation methodologies will soon be made available.
+Source code to run the suggested evaluation methodologies is also available.
 
 
 ## Download
 
 The data set is available as a CSV file [here](ParaLex.csv).
+
+## Running the Evaluation Package
+
+Clone this directory to the machine you want to run the evaluation on.
+
+There are two evaluation scripts: neighbourhood_coherence_test.py and suggestion_test.py.
+
+For help on running the the scripts, call them with a help flag -h:
+
+python3 neighbourhood_coherence_test.py -h
+
+Some typical usage examples would be:
+
+python3 vector_file.txt EN
+python3 glove_vector_file.txt EN -f glove
+
+The default input format for a model is a Word2Vec text file. Glove format text files and binary files are also accepted
+using the relevant flags. 
 
 ## Contribute
 
