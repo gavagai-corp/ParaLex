@@ -3,7 +3,7 @@ import sys
 from collections import Counter
 from numpy import mean, std, var
 from itertools import combinations as choose
-from aux_functions import paradigmatic_neighbours, load_language_specific_data, load_model
+from aux_functions import paradigmatic_neighbours, load_language_specific_data, load_model, parse_arguments
 import argparse
 
 
@@ -150,10 +150,7 @@ def pretty_print(test_results):
 
 
 def main():
-    path_to_model = sys.argv[1]
-    model_format = sys.argv[2]
-    language = sys.argv[3]
-
+    path_to_model, model_format, language = parse_arguments()
     model = load_model(path_to_model, model_format)
     language_data = load_language_specific_data(language)
     results = iter_sug_test_with_seed_coherence(evaluation_data=language_data, threshold=2,

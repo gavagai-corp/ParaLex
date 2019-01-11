@@ -1,6 +1,5 @@
 from __future__ import print_function, division
-from aux_functions import paradigmatic_neighbours, load_language_specific_data, load_model
-import sys
+from aux_functions import paradigmatic_neighbours, load_language_specific_data, load_model, parse_arguments
 
 
 def test_cluster(cluster_words, model_under_evaluation):
@@ -26,14 +25,10 @@ def neighbourhood_coherence_test(evaluation_data, model_under_evaluation):
 
 
 def main():
-    path_to_model = sys.argv[1]
-    model_format = sys.argv[2]
-    language = sys.argv[3]
-
+    path_to_model, model_format, language = parse_arguments()
     model = load_model(path_to_model, model_format)
     language_data = load_language_specific_data(language)
     result = neighbourhood_coherence_test(language_data, model)
-
     print('Final score:', result)
 
 
