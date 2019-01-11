@@ -24,7 +24,7 @@ def load_language_specific_data(language):
         selection_column = 1
     else:  # language code
         selection_column = 0
-    rows = [row for row in data_sheet if row[selection_column] == language.upper()]
+    rows = [row for row in data_sheet if row[selection_column].upper() == language.upper()]
     if len(rows) == 0:
         raise Exception('Language not found')
     output = {}
