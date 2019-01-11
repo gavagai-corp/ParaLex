@@ -51,7 +51,10 @@ def load_model(file, format_flag):
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("path_to_model", help="the path of the model you wish to evaluate")
-    parser.add_argument("model_format", help="the format of the model you are evaluating")
-    parser.add_argument("language", help="the language of the model")
+    parser.add_argument("-f", "--format", help="the format of the model you are evaluating")
+    parser.add_argument("language", help="both name and ISO language code accepted")
     args = parser.parse_args()
-    return args.path_to_model, args.model_format, args.language
+    return args.path_to_model, args.format, args.language
+
+
+print(parse_arguments())
