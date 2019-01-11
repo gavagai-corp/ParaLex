@@ -34,9 +34,9 @@ def load_language_specific_data(language):
 
 
 def load_model(file, format_flag):
-    if format_flag == '-b':
+    if format_flag == 'binary':
         model = KeyedVectors.load_word2vec_format(file, binary=True, encoding='utf8')
-    elif format_flag == '-g':  # glove format_flag
+    elif format_flag == 'glove':
         w2v_file = file[:-4] + '.w2v.txt'
         if w2v_file in os.listdir():
             pass
