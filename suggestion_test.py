@@ -149,15 +149,12 @@ def pretty_print(test_results):
         print(tup[0], '\t', tup[1], '\t', tup[2], '\t', tup[3])
 
 
-def old_main():
-    # argv 1=vectors, 2=vec_format, 3=lang in GavFormat
-
+def main():
     path_to_model = sys.argv[1]
     model_format = sys.argv[2]
+    language = sys.argv[3]
 
     model = load_model(path_to_model, model_format)
-
-    language = sys.argv[3]
     language_data = load_language_specific_data(language)
     results = iter_sug_test_with_seed_coherence(evaluation_data=language_data, threshold=2,
                                                 model_under_evaluation=model)
@@ -165,4 +162,4 @@ def old_main():
 
 
 if __name__ == '__main__':
-    old_main()
+    main()

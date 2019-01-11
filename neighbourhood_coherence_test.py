@@ -26,16 +26,12 @@ def neighbourhood_coherence_test(evaluation_data, model_under_evaluation):
 
 
 def main():
-
-    # argv 1=vectors, 2=vec_format, 3=lang in GavFormat
-
     path_to_model = sys.argv[1]
     model_format = sys.argv[2]
     language = sys.argv[3]
 
     model = load_model(path_to_model, model_format)
     language_data = load_language_specific_data(language)
-
     result = neighbourhood_coherence_test(language_data, model)
 
     print('Final score:', result)
