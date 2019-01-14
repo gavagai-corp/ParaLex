@@ -20,7 +20,7 @@ Clone this directory to the machine you want to run the evaluation on.
 
 There are two evaluation scripts: neighbourhood_coherence_test.py and suggestion_test.py.
 
-For help on running the the scripts, call them with a help flag -h:
+**For help on running the the scripts, call them with a help flag**:
 
 python3 neighbourhood_coherence_test.py -h
 
